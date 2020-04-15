@@ -1,11 +1,15 @@
 export function stackCreate() {
-  throw new Error("TODO");
+  return [];
 }
 
 export function stackPush(stack, item) {
-  throw new Error("TODO");
+  stack[stack.length] = item;
 }
 
 export function stackPop(stack) {
-  throw new Error("TODO");
+  if(stack.length !== 0){
+    const popResult = stack[stack.length - 1];
+    stack.length = [stack.length - 1]
+    return popResult;
+  }
 }
