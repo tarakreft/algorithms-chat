@@ -11,12 +11,6 @@ export function stackPush(stack, item) {
 }
 
 export function stackPop(stack) {
-  if(stack.next){
-    const newNode = stackCreate(stack.next.item, stack.next.next);
-    return [stack.next, stack.item];
-  } else {
-    const newNode = stackCreate(stack.item, stack.next);
-    return [stack.next, stack.item];
-  }
+  return [stack.next, stack.item];
 }
 
