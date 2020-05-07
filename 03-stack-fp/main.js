@@ -1,11 +1,22 @@
-export function stackCreate() {
-  throw new Error("TODO");
+export function stackCreate(item, next) {
+  return {
+    item: item,
+    next: next
+  };
 }
 
 export function stackPush(stack, item) {
-  throw new Error("TODO");
+  const newNode = stackCreate(item, stack);
+  return newNode;
 }
 
 export function stackPop(stack) {
-  throw new Error("TODO");
+  if(stack.next){
+    const newNode = stackCreate(stack.next.item, stack.next.next);
+    return [stack.next, stack.item];
+  } else {
+    const newNode = stackCreate(stack.item, stack.next);
+    return [stack.next, stack.item];
+  }
 }
+

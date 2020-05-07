@@ -21,8 +21,11 @@ test("stackPop returns undefined on a stack of size 0", () => {
 });
 
 test("stackPop works on a stack of size 1", () => {
-  const stack = stackCreate();
-  stackPush(stack, "a");
+  let stack = stackCreate();
+  let item = undefined;
+  stack = stackPush(stack, "a");
+  [stack, item] = stackPop(stack);
+  expect(item).toBe("a");
 });
 
 test("stackPop works on a stack of size 3", () => {
