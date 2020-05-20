@@ -1,33 +1,68 @@
 export function bstCreate() {
-  // NOTE: You can use classes here if you want!
-  //
-  //     return new BST()
-  //
-  throw new Error("TODO");
+  return {
+    root: null
+  }
 }
 
 export function bstNodeCreate(item) {
-  // NOTE: You can use classes here if you want!
-  //
-  //     return new BSTItem(item)
-  //
-  throw new Error("TODO");
+  return {
+    item: item,
+    left: null,
+    right: null
+  }
+}
+
+function fillEmptyNode(node, item){
+  if(item < node.item){
+    if(!node.left){
+      node.left = bstNodeCreate(item);
+    } else {
+      fillEmptyNode(node.left, item);
+    }
+  } else {
+    if(!node.right){
+      node.right = bstNodeCreate(item);
+    } else {
+      fillEmptyNode(node.right, item);
+    }
+  }
 }
 
 export function bstAdd(tree, item) {
-  // NOTE: You will probably want to create a second function outside of this
-  // that takes in a BST node rather than the entire BST
-  throw new Error("TODO");
+  if(!tree.root){
+   tree.root = bstNodeCreate(item);
+  } else {
+    fillEmptyNode(tree.root, item);
+  }
+}
+
+function organizeNodes(node, callback){
+  if(node.item === null){
+    return;
+  }
+  if(node.left){
+    organizeNodes(node.left, callback)
+  }
+  callback(node.item);
+
+  if(node.right){
+    organizeNodes(node.right, callback)
+  }
 }
 
 export function bstEach(tree, callback) {
-  // NOTE: You will probably want to create a second function outside of this
-  // that takes in a BST node rather than the entire BST
-  throw new Error("TODO");
+ organizeNodes(tree.root, callback);
+}
+
+function* organizeNodesIterator(node){
+  if(!node){
+    return;
+  }
+  yield* organizeNodesIterator(node.left)
+  yield node.item;
+  yield* organizeNodesIterator(node.right)
 }
 
 export function* bstIterator(tree) {
-  // NOTE: You will probably want to create a second function outside of this
-  // that takes in a BST node rather than the entire BST
-  throw new Error("TODO");
+  yield* organizeNodesIterator(tree.root);
 }
